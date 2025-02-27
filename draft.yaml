@@ -1,0 +1,65 @@
+models:
+  Contact:
+    label: string:200
+    value: longtext
+    user_id: id foreign:users.id
+    softDeletes: true
+    relationships:
+      belongsTo: User
+  Category:
+    name: string:200
+    code: string:10
+    is_public: boolean default:true
+    is_promediable: boolean default:true
+    is_schedulable: boolean default:false
+    status: enum:active,inactive default:active
+    softDeletes: true
+    relationships:
+      hasMany: Queue
+  Queue:
+    category_id: id foreign:category.id
+    type: string default:public
+    last_technician: integer default:0
+    status: enum:active,inactive default:active
+    softDeletes: true
+    relationships:
+      belongsTo: Category
+      hasMany: QueueTechnician
+  QueueTechnician:
+    order: integer default:0
+    technician_id: id foreign:users.id
+    queue_id: id foreign:queue.id
+    status: enum:active,inactive default:active
+    softDeletes: true
+    relationships:
+      hasMany: User
+      belongsTo: Queue
+  Configuration:
+    name: string
+    code: string
+    value: longtext
+    status: enum:active,inactive default:active
+    softDeletes: true
+    relationships:
+      hasMany: ConfigurationHistory
+  ConfigurationHistory:
+    event: longtext
+    last_config: longtext
+    new_config: longtext
+    configuration_id: id foreign:configuration.id
+    softDeletes: true
+    relationships:
+      belongsTo: Configuration
+controllers:
+  Contact:
+    resource: all
+  Category:
+    resource: all
+  Queue:
+    resource: all
+  QueueTechnician:
+    resource: all
+  Configuration:
+    resource: all
+  ConfigurationHistory:
+    resource: all

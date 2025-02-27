@@ -1,0 +1,45 @@
+created:
+    - app/Http/Controllers/ContactController.php
+    - app/Http/Controllers/CategoryController.php
+    - app/Http/Controllers/QueueController.php
+    - app/Http/Controllers/QueueTechnicianController.php
+    - app/Http/Controllers/ConfigurationController.php
+    - app/Http/Controllers/ConfigurationHistoryController.php
+    - database/factories/ContactFactory.php
+    - database/factories/CategoryFactory.php
+    - database/factories/QueueFactory.php
+    - database/factories/QueueTechnicianFactory.php
+    - database/factories/ConfigurationFactory.php
+    - database/factories/ConfigurationHistoryFactory.php
+    - database/migrations/2025_02_27_174951_create_contacts_table.php
+    - database/migrations/2025_02_27_174952_create_categories_table.php
+    - database/migrations/2025_02_27_174953_create_queues_table.php
+    - database/migrations/2025_02_27_174954_create_queue_technicians_table.php
+    - database/migrations/2025_02_27_174955_create_configurations_table.php
+    - database/migrations/2025_02_27_174956_create_configuration_histories_table.php
+    - app/Models/Contact.php
+    - app/Models/Category.php
+    - app/Models/Queue.php
+    - app/Models/QueueTechnician.php
+    - app/Models/Configuration.php
+    - app/Models/ConfigurationHistory.php
+    - tests/Feature/Http/Controllers/ContactControllerTest.php
+    - tests/Feature/Http/Controllers/CategoryControllerTest.php
+    - tests/Feature/Http/Controllers/QueueControllerTest.php
+    - tests/Feature/Http/Controllers/QueueTechnicianControllerTest.php
+    - tests/Feature/Http/Controllers/ConfigurationControllerTest.php
+    - tests/Feature/Http/Controllers/ConfigurationHistoryControllerTest.php
+updated:
+    - routes/web.php
+models:
+    Contact: { label: 'string:200', value: longtext, user_id: 'id foreign:users.id', softdeletes: softDeletes, relationships: { belongsTo: User } }
+    contact: { label: 'string:200', value: longtext, user_id: 'id foreign:users.id', relationships: { belongsTo: User } }
+    category: { name: 'string:200', code: 'string:10', is_public: 'boolean default:true', is_promediable: 'boolean default:true', is_schedulable: 'boolean default:false', status: 'enum:active,inactive default:active', relationships: { hasMany: queue } }
+    queue: { category_id: 'id foreign:category.id', type: 'string default:public', last_technician: 'integer default:0', status: 'enum:active,inactive default:active', relationships: { belongsTo: category, hasMany: queue_technician } }
+    queue_technician: { order: 'integer default:0', technician_id: 'id foreign:technician.id', queue_id: 'id foreignt:queue.id', status: 'enum:active,inactive default:active', relationships: { hasMany: User, belongsTo: queue } }
+    queueTechnician: { order: 'integer default:0', technician_id: 'id foreign:technician.id', queue_id: 'id foreignt:queue.id', status: 'enum:active,inactive default:active', relationships: { hasMany: User, belongsTo: queue } }
+    Category: { name: 'string:200', code: 'string:10', is_public: 'boolean default:true', is_promediable: 'boolean default:true', is_schedulable: 'boolean default:false', status: 'enum:active,inactive default:active', softdeletes: softDeletes, relationships: { hasMany: Queue } }
+    Queue: { category_id: 'id foreign:category.id', type: 'string default:public', last_technician: 'integer default:0', status: 'enum:active,inactive default:active', softdeletes: softDeletes, relationships: { belongsTo: Category, hasMany: QueueTechnician } }
+    QueueTechnician: { order: 'integer default:0', technician_id: 'id foreign:users.id', queue_id: 'id foreign:queue.id', status: 'enum:active,inactive default:active', softdeletes: softDeletes, relationships: { hasMany: User, belongsTo: Queue } }
+    Configuration: { name: string, code: string, value: longtext, status: 'enum:active,inactive default:active', softdeletes: softDeletes, relationships: { hasMany: ConfigurationHistory } }
+    ConfigurationHistory: { event: longtext, last_config: longtext, new_config: longtext, configuration_id: 'id foreign:configuration.id', softdeletes: softDeletes, relationships: { belongsTo: Configuration } }

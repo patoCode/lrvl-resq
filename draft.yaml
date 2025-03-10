@@ -50,16 +50,4 @@ models:
     softDeletes: true
     relationships:
       belongsTo: Configuration
-controllers:
-  Contact:
-    resource: all
-  Category:
-    resource: all
-  Queue:
-    resource: all
-  QueueTechnician:
-    resource: all
-  Configuration:
-    resource: all
-  ConfigurationHistory:
-    resource: all
+

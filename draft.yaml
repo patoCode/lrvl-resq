@@ -17,7 +17,7 @@ models:
     relationships:
       hasMany: Queue
   Queue:
-    category_id: id foreign:category.id
+    category_id: id foreign:categories.id
     type: string default:public
     last_technician: integer default:0
     status: enum:active,inactive default:active

@@ -14,4 +14,6 @@
             </div>
         </div>
     </div>
+    <livewire:categoria-component />
+
 </x-app-layout>

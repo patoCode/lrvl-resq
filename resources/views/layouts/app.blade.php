@@ -28,8 +28,8 @@
             @endisset
 
             <!-- Page Content -->
-            <main>
-                {{ $slot }}
+            <main class="m-2 p-2 rounded bg-base dark:bg-slate-400 ">
+                @yield('content')
             </main>
         </div>
     </body>

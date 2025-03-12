@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\ConfigurationController;
+USE App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -22,3 +25,9 @@ Route::middleware('auth')->group(function () {
 require __DIR__.'/auth.php';
 
 Route::resource('categories', CategoryController::class);
+Route::resource('users', UserController::class);
+Route::resource('configurations', ConfigurationController::class);
+Route::resource('contacts', ContactController::class)->only(['store', 'create']);
+
+Route::get('/categories/{id}/colas', [CategoryController::class, 'obtenerColas']);
+Route::post('/colas/agregar-tecnico', [CategoryController::class, 'agregarTecnico']);

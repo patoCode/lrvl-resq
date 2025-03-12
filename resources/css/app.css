@@ -2,15 +2,40 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer components{
-    .btn{
 
+input{
+    @apply rounded-md border bg-white text-gray-800 dark:text-gray-100 dark:bg-white/20 dark:border-purple-400
+}
+
+@layer components{
+
+    .btn{
+        @apply border border-slate-300 text-slate-800 rounded-md px-3 py-1 font-semibold text-[10px]
     }
-    .btn-save{}
-    .btn-cancel{}
-    .btn-new{}
-    .btn-edit{}
-    .btn-delete{}
+    .btn-save{
+        @apply bg-green-200 border-green-800 text-green-800
+    }
+    .btn-cancel{
+        @apply bg-purple-200 border-purple-800 text-purple-800
+    }
+    .btn-new{
+        @apply bg-blue-200 border-blue-800 text-blue-800
+    }
+    .btn-edit{
+        @apply bg-sky-200 border-sky-800 text-sky-800
+    }
+    .btn-delete{
+        @apply bg-red-200 border-red-800 text-red-800
+    }
+    .btn-common-action{
+        @apply bg-purple-200 border-purple-800 text-purple-800
+    }
+    .message-box{
+        @apply px-3 py-1 rounded-md bg-gray-200 text-[12px]
+    }
+    .message-box-error{
+        @apply bg-red-300 text-red-800 border-red-800
+    }
 
 }
 

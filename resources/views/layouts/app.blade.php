@@ -28,7 +28,7 @@
             @endisset
 
             <!-- Page Content -->
-            <main class="m-2 p-2 rounded bg-base dark:bg-slate-400 ">
+            <main class="grid grid-cols-4 gap-4 dark:text-slate-200">
                 @yield('content')
             </main>
         </div>

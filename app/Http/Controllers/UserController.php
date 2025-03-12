@@ -12,16 +12,13 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
-        return view('user.list',['users' => $users]);
+        $users = User::paginate(10);
+        return view('users.index', compact('users'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        return view('user.create');
+        return view('users.create');
     }
 
     /**
